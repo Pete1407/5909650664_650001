@@ -1,0 +1,63 @@
+B.born{
+   font-size:19px;
+   color:darkgreen;
+}
+
+h1{
+   font-family:"serif";
+   color:yellow;
+}
+
+body{
+   background: url(wallpaper.jpg) left top no-repeat, url(wallpaper.jpg) right bottom no-repeat, url(wallpaper.jpg) left top repeat;
+}
+
+.table{
+   background-color:hsl(0, 100%, 90%);;
+}
+
+#matrix{
+    color:yellow;
+}
+
+th{
+    background-color:hsl(0, 100%, 30%);;
+    color:yellow;
+}
+
+#txt1,#txt2,#txt3,#txt4,#txt5,#txt6{
+   color:yellow;
+}
+
+input[type='radio']:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #d1d3d1;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+
+    input[type='radio']:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #ffa500;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+
+
+#submit{
+    backgroud-color:yellow;
+}

@@ -1,0 +1,775 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ <link rel="stylesheet" type="text/css" href="style_for_searchFlights.css">
+
+</head>
+
+
+<body>
+
+<div class="container-fluid">
+    <ul class="nav nav-tabs" role="tablist">
+       <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#list">List View</a>
+       </li>
+       <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#matrix">Matrix View</a>
+       </li>
+
+  </ul>
+
+  <div class="tab-content">
+    <div id="list" class="container tab-pane active"><br>
+         Hello World!!!!
+
+    </div>
+
+    <div id="matrix" class="container tab-pane fade"><br>
+<table class="table">
+    <thread>
+
+    <tr>
+      <div class="row">
+            <p><span id="broken_glass" class="badge badge-pill badge-dark">1</span><B id="bold"> of flight shown-one way<B></p>
+      </div>
+    </tr>
+
+    <tr>
+         <th>Prince</th>
+         <th>Airtime</th>
+         <th>Take-off</th>
+         <th>Landing</th>
+         <th>Stops(Duration)</th>
+    </tr>
+    <tbody id="main">
+
+    </tbody>
+
+
+
+
+
+    </thread>
+
+</table>
+
+
+    <div class="row">
+        <div class="col-sm-5"></div>
+           <div class="col-sm-7">
+             <ul class="pagination">
+                 <li class="page_item"><a href="javascript:previouspage()" class="page-link" id="previous"><B><</B></a></li>
+                 <li class="page_item"><a class="page-link" id="present">1</a></li>
+                 <li class="page_item"><a href="javascript:nextpage()" class="page-links" id="next"><B>></B></a></li>
+             </ul>
+           </div>
+
+    </div>
+    <script>
+
+   $(document).ready(function() {
+   $('li.active').removeClass('active');
+   $('a[href="#matrix"]').closest('li').addClass('active');
+   });
+    var record_to_page = 3;
+    var present_page = 1;
+    var garbage = 0;
+    var nicki = 0;
+    var array = [
+     {
+        "price":1000,
+        "airline":"Singapore air",
+        "takeoff":"SINGA 06:00",
+        "landing":"CDG 18:00",
+        "stop":"1(12)"
+
+
+     },
+
+     {
+       "price":2000,
+       "airline":"Thailand air",
+       "takeoff":"BKK 07:00",
+       "landing":"CDG 19:00",
+       "stop":"2(12)"
+
+     },
+
+     {
+       "price":3000,
+       "airline":"Indonesia air",
+       "takeoff":"INDO 08:00",
+       "landing":"CDG 20:00",
+       "stop":"3(12)"
+
+     },
+
+     {
+       "price":4000,
+       "airline":"Scotland air",
+       "takeoff":"SC 07:00",
+       "landing":"CDG 23:00",
+       "stop":"4(12)"
+
+     },
+
+
+     {
+       "price":5000,
+       "airline":"France air",
+       "takeoff":"FR 07:00",
+       "landing":"CDG 21:00",
+       "stop":"5(12)"
+
+     },
+
+
+     {
+       "price":6000,
+       "airline":"New Zealand air",
+       "takeoff":"NZ 08:00",
+       "landing":"CDG 22:00",
+       "stop":"6(12)"
+
+     },
+
+
+     {
+       "price":7000,
+       "airline":"Spain air",
+       "takeoff":"SP 12:00",
+       "landing":"CDG 23:00",
+       "stop":"7(12)"
+
+     },
+
+     {
+       "price":8000,
+       "airline":"Netherland air",
+       "takeoff":"NL 07:00",
+       "landing":"CDG 12:00",
+       "stop":"8(12)"
+
+     },
+
+     {
+       "price":9000,
+       "airline":"New Zealand air",
+       "takeoff":"NZ 08:00",
+       "landing":"CDG 22:00",
+       "stop":"9(12)"
+
+     },
+
+     {
+       "price":100000,
+       "airline":"New Zealand air",
+       "takeoff":"NZ 08:00",
+       "landing":"CDG 22:00",
+       "stop":"10(12)"
+
+     },
+
+
+     {
+       "price":110000,
+       "airline":"Arab Emirate air",
+       "takeoff":"AE 08:00",
+       "landing":"CDG 22:00",
+       "stop":"11(12)"
+
+     },
+
+     {
+       "price":120000,
+       "airline":"Elizabeth air",
+       "takeoff":"NZ 08:00",
+       "landing":"CDG 22:00",
+       "stop":"6(12)"
+
+     }
+
+
+
+
+
+    ];
+/*
+    "price":4000,
+    "airline":"Scotland air",
+    "takeoff":"SC 07:00",
+    "landing":"CDG 23:00",
+    "stop":"4"
+*/
+  document.getElementById("bold").innerHTML = "of "+array.length+" flight shown-one way";
+  var current_page = 1;
+  var records_per_page = 3;
+  var a = 0;
+  var represent = 0;
+  var love = 0;
+  function presentpage()
+  {
+
+     var present_page = document.getElementsByClassName("page_item");
+     //var hippo = document.getElementById("present").innerHTML;
+     document.getElementById("present").innerHTML = current_page;
+  }
+var textinnode;
+var bold;
+var textnode;
+var text;
+var txt;
+var sia;
+var mainsecond;
+var link;
+var email;
+var print;
+var number=0;
+  function firstpage()
+  {
+
+        nicki++;
+
+        previous.style.visibility = "hidden";
+        for(var i=0;i<records_per_page;i++)
+        {
+           number++;
+           represent = a++;
+           console.log("----------------------------------------");
+           console.log("REPRESENT in firstpage: "+represent);
+           console.log("A in firstpage: "+a);
+           console.log("----------------------------------------");
+           if(represent==array.length)
+           {
+               break;
+           }
+           console.log("a: "+represent);
+           var main = document.getElementById("main");
+           mainsecond = document.createElement("tr");
+
+
+           var elementone = document.createElement("td");
+           textinnode = document.createTextNode(array[i].price);
+           bold = document.createElement("B");
+
+           bold.setAttribute("class","born");
+           bold.appendChild(textinnode);
+           elementone.appendChild(bold);
+
+           mainsecond.appendChild(elementone);
+
+           var elementtwo = document.createElement("td");
+           textnode = document.createTextNode(array[i].airline);
+          // var bold = document.createElement("B");
+           //bold.appendChild(textnode);
+           elementtwo.appendChild(textnode);
+
+           mainsecond.appendChild(elementtwo);
+
+           var elementthree = document.createElement("td");
+           text = document.createTextNode(array[i].takeoff);
+           elementthree.appendChild(text);
+
+           mainsecond.appendChild(elementthree);
+
+           var elementfour = document.createElement("td");
+           txt = document.createTextNode(array[i].landing);
+           elementfour.appendChild(txt);
+
+           mainsecond.appendChild(elementfour);
+
+           var elementfive = document.createElement("td");
+
+           link = document.createElement("a");
+           email = document.createElement("a");
+           link.setAttribute("href","#");
+           email.setAttribute("class","glyphicon glyphicon-envelope");
+           link.innerHTML = " details ";
+           var space = document.createTextNode(" ");
+           print = document.createElement("a");
+           print.setAttribute("class","glyphicon glyphicon-print");
+            //<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>
+           sia = document.createTextNode(array[i].stop);
+           elementfive.appendChild(sia);
+           elementfive.appendChild(link);
+           elementfive.appendChild(email);
+           elementfive.appendChild(space);
+           elementfive.appendChild(print);
+           mainsecond.appendChild(elementfive);
+
+
+           main.appendChild(mainsecond);
+
+           var lists = document.getElementById("main");
+           var items = document.getElementsByTagName("td");
+
+      }
+      document.getElementById("broken_glass").innerHTML = number;
+      document.getElementById("bold").innerHTML = "of "+array.length+" flight shown-one way";
+var hm = 0;
+      var list1 = document.getElementById("main");
+      var items = document.getElementsByTagName("tr");
+      for(var i=0;i<records_per_page;i++)
+      {
+        hm++;
+         //alert(items[i].innerHTML);
+        items[i].addEventListener('click', function()
+        {
+            var bold = document.createElement("B");
+            bold.appendChild(textnode);
+
+            var boldtwo = document.createElement("B");
+            boldtwo.appendChild(text);
+
+            var boldthree = document.createElement("B");
+            boldthree.appendChild(txt);
+
+            var boldfour = document.createElement("B");
+            boldfour.appendChild(sia);
+
+
+
+            elementtwo.appendChild(bold);
+            elementthree.appendChild(boldtwo);
+            elementfour.appendChild(boldthree);
+            elementfive.appendChild(boldfour);
+
+            //elementfive.removeChild(sia);
+
+            elementfive.removeChild(link);
+            elementfive.removeChild(email);
+            elementfive.removeChild(print);
+
+            var boldtext = document.createElement("B");
+            boldtext.appendChild(sia);
+            link = document.createElement("a");
+            link.setAttribute("href","#");
+            link.innerHTML = " details ";
+
+            elementfive.appendChild(boldtext);
+            elementfive.appendChild(link);
+            var space = document.createTextNode(" ");
+            elementfive.appendChild(email);
+            elementfive.appendChild(space);
+            elementfive.appendChild(print);
+
+
+            mainsecond.appendChild(elementtwo);
+            mainsecond.appendChild(elementthree);
+            mainsecond.appendChild(elementfour);
+            mainsecond.appendChild(elementfive);
+
+            document.getElementById("brokenglass").innerHTML = hm;
+        })
+      }
+
+
+
+
+
+
+
+      }
+
+
+
+
+  function changePage(page)
+  {
+
+      console.log("Size array: "+array.length);
+
+      document.getElementById("next").onclick = function(){
+           if(nicki>2)
+           {
+              represent = 3;
+              console.log("RHanna  "+represent);
+              a = 3;
+              console.log("RHanna  "+a);
+           }
+      }
+
+       if(page>1)
+       {
+         previous.style.visibility = "visible";
+
+         var rowCount = document.getElementById("main").rows.length;
+         for (var i = rowCount-1; i >= 0; i--)
+         {
+             document.getElementById("main").deleteRow(i);
+         }
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+         if(array.length%2==0)
+         {
+
+           for(var i=0;i<record_to_page;i++)
+           {
+              number++;
+              represent = a++;
+              if(represent>array.length)
+              {
+                console.log("Happier")
+                 represent = 3;
+              }
+              if(represent==array.length)
+              {
+                //  next.style.visibility = "hidden";
+                  break;
+              }
+              console.log("represent: "+represent);
+              console.log("a: "+represent);
+              if(represent==array.length)
+              {
+                //  a = a - 1;
+                  represent = represent -  1 ;
+              }
+              var main = document.getElementById("main");
+              var mainsecond = document.createElement("tr");
+
+              var elementone = document.createElement("td");
+              var textinnode = document.createTextNode(array[represent].price);
+              var bold = document.createElement("B");
+              bold.setAttribute("class","born");
+              bold.appendChild(textinnode);
+              elementone.appendChild(bold);
+
+              mainsecond.appendChild(elementone);
+
+              var elementtwo = document.createElement("td");
+              var textnode = document.createTextNode(array[represent].airline);
+             // var bold = document.createElement("B");
+              //bold.appendChild(textnode);
+              elementtwo.appendChild(textnode);
+
+              mainsecond.appendChild(elementtwo);
+
+              var elementthree = document.createElement("td");
+              var text = document.createTextNode(array[represent].takeoff);
+              elementthree.appendChild(text);
+
+              mainsecond.appendChild(elementthree);
+
+              var elementfour = document.createElement("td");
+              var txt = document.createTextNode(array[represent].landing);
+              elementfour.appendChild(txt);
+
+              mainsecond.appendChild(elementfour);
+
+              var elementfive = document.createElement("td");
+
+              var link = document.createElement("a");
+              var email = document.createElement("a");
+              link.setAttribute("href","#");
+              email.setAttribute("class","glyphicon glyphicon-envelope");
+              link.innerHTML = " details ";
+              var space = document.createTextNode(" ");
+              var print = document.createElement("a");
+              print.setAttribute("class","glyphicon glyphicon-print");
+
+              var sia = document.createTextNode(array[represent].stop);
+              elementfive.appendChild(sia);
+              elementfive.appendChild(link);
+              elementfive.appendChild(email);
+              elementfive.appendChild(space);
+              elementfive.appendChild(print);
+              mainsecond.appendChild(elementfive);
+
+
+              main.appendChild(mainsecond);
+
+           }
+           document.getElementById("broken_glass").innerHTML = number;
+             document.getElementById("bold").innerHTML = "of "+array.length+" flight shown-one way";
+         }
+         else if(array.length%2==1)
+         {
+              represent++;
+
+              for(var i=0;i<record_to_page;i++)
+              {
+                 number++;
+                 represent = a++;
+                 if(represent==array.length)
+                 {
+                     break;
+                 }
+                 console.log("represent: "+represent);
+                 console.log("a: "+represent);
+                 if(represent==array.length)
+                 {
+                   //  a = a - 1;
+                     represent = represent -  1 ;
+                 }
+                 var main = document.getElementById("main");
+                 var mainsecond = document.createElement("tr");
+
+                 var elementone = document.createElement("td");
+                 var textinnode = document.createTextNode(array[represent].price);
+                 var bold = document.createElement("B");
+                 bold.setAttribute("class","born");
+                 bold.appendChild(textinnode);
+                 elementone.appendChild(bold);
+
+                 mainsecond.appendChild(elementone);
+
+                 var elementtwo = document.createElement("td");
+                 var textnode = document.createTextNode(array[represent].airline);
+                // var bold = document.createElement("B");
+                 //bold.appendChild(textnode);
+                 elementtwo.appendChild(textnode);
+
+                 mainsecond.appendChild(elementtwo);
+
+                 var elementthree = document.createElement("td");
+                 var text = document.createTextNode(array[represent].takeoff);
+                 elementthree.appendChild(text);
+
+                 mainsecond.appendChild(elementthree);
+
+                 var elementfour = document.createElement("td");
+                 var txt = document.createTextNode(array[represent].landing);
+                 elementfour.appendChild(txt);
+
+                 mainsecond.appendChild(elementfour);
+
+                 var elementfive = document.createElement("td");
+
+                 var link = document.createElement("a");
+                 var email = document.createElement("a");
+                 link.setAttribute("href","#");
+                 email.setAttribute("class","glyphicon glyphicon-envelope");
+                 link.innerHTML = " details ";
+                 var space = document.createTextNode(" ");
+                 var print = document.createElement("a");
+                 print.setAttribute("class","glyphicon glyphicon-print");
+                  //<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>
+                 var sia = document.createTextNode(array[represent].stop);
+                 elementfive.appendChild(sia);
+                 elementfive.appendChild(link);
+                 elementfive.appendChild(email);
+                 elementfive.appendChild(space);
+                 elementfive.appendChild(print);
+                 mainsecond.appendChild(elementfive);
+
+
+                 main.appendChild(mainsecond);
+
+              }
+               document.getElementById("broken_glass").innerHTML = number;
+                 document.getElementById("bold").innerHTML = "of "+array.length+" flight shown-one way";
+
+
+
+
+         }
+
+
+
+       }
+       else
+       {
+           previous.style.visibility = "hidden";
+           var rowCount = document.getElementById("main").rows.length;
+           for (var i = rowCount-1; i >= 0; i--)
+           {
+             document.getElementById("main").deleteRow(i);
+           }
+           firstpage();
+
+       }
+
+       if(page==numberpage())
+       {
+           next.style.visibility = "hidden";
+       }
+  }
+
+
+
+
+
+function previouspage()
+{
+
+     if(current_page>=1)
+     {
+        current_page--;
+
+        //changePage(a);
+        presentpage();
+        reversepage();
+
+     }
+     else if(current_page===1)
+     {
+        firstpage();
+
+     }
+}
+
+function nextpage()
+{
+      if(current_page < numberpage())
+      {
+
+          current_page++;
+          changePage(current_page);
+          presentpage();
+      }
+
+}
+
+function reversepage()
+{
+
+
+     next.style.visibility = "visible";
+
+  var rowCount = document.getElementById("main").rows.length;
+  for (var i = rowCount-1; i >= 0; i--)
+  {
+      document.getElementById("main").deleteRow(i);
+  }
+
+
+  for(var decrease=0;decrease<records_per_page;decrease++)
+  {
+       nicki--;
+
+      if(represent<0)
+      {
+
+         represent = 0;
+        previous.style.visibility = "hidden";
+      }
+      represent = represent - 1;
+      console.log(represent+" ##########");
+      love = represent;
+  }
+  love = love-3;
+  var rowCount = document.getElementById("main").rows.length;
+
+  for (var i = rowCount-1; i >= 0; i--)
+  {
+      document.getElementById("main").deleteRow(i);
+  }
+
+  if(love<0)
+  {
+    console.log("Peeeeeeeeeeeeeeeee");
+     //reset();
+  }
+  for(var i=0;i<records_per_page;i++)
+  {
+    love++;
+    number--;
+    console.log("Ganja Burn "+love);
+     if(love==array.length)
+     {
+         break;
+     }
+
+
+     var main = document.getElementById("main");
+     var mainsecond = document.createElement("tr");
+
+     var elementone = document.createElement("td");
+     var textinnode = document.createTextNode(array[love].price);
+     var bold = document.createElement("B");
+     bold.setAttribute("class","born");
+     bold.appendChild(textinnode);
+     elementone.appendChild(bold);
+
+     mainsecond.appendChild(elementone);
+
+     var elementtwo = document.createElement("td");
+     var textnode = document.createTextNode(array[love].airline);
+    // var bold = document.createElement("B");
+     //bold.appendChild(textnode);
+     elementtwo.appendChild(textnode);
+
+     mainsecond.appendChild(elementtwo);
+
+     var elementthree = document.createElement("td");
+     var text = document.createTextNode(array[love].takeoff);
+     elementthree.appendChild(text);
+
+     mainsecond.appendChild(elementthree);
+
+     var elementfour = document.createElement("td");
+     var txt = document.createTextNode(array[love].landing);
+     elementfour.appendChild(txt);
+
+     mainsecond.appendChild(elementfour);
+
+     var elementfive = document.createElement("td");
+
+     var link = document.createElement("a");
+     var email = document.createElement("a");
+     link.setAttribute("href","#");
+     email.setAttribute("class","glyphicon glyphicon-envelope");
+     link.innerHTML = " details ";
+     var space = document.createTextNode(" ");
+     var print = document.createElement("a");
+     print.setAttribute("class","glyphicon glyphicon-print");
+
+     var sia = document.createTextNode(array[love].stop);
+     elementfive.appendChild(sia);
+     elementfive.appendChild(link);
+     elementfive.appendChild(email);
+     elementfive.appendChild(space);
+     elementfive.appendChild(print);
+     mainsecond.appendChild(elementfive);
+
+
+     main.appendChild(mainsecond);
+
+  }
+   document.getElementById("broken_glass").innerHTML = number;
+  if(love==2)
+  {
+    //  a = a - 1;
+   love = 0;
+   console.log("Set zero: "+love)
+  }
+}
+
+function reset()
+{
+    a = 3;
+    represent = 3;
+    love = 0;
+}
+
+function numberpage()
+{
+   return Math.ceil(array.length/records_per_page);
+}
+
+
+firstpage();
+presentpage();
+
+</script>
+
+
+
+
+</div>
+</body>
+</html>
